@@ -1,37 +1,47 @@
-package ru.dmdev.lesson24.homework;
+package ru.dmdev.lesson24.decisionHW;
 
 public class Point {
-    private int coordinateX;
-    private int coordinateY;
 
-    public Point(int coordinateX, int coordinateY) {
-        this.coordinateX = coordinateX;
-        this.coordinateY = coordinateY;
+    private final int x;
+    private final int y;
+
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
-    public int getCoordinateX() {
-        return coordinateX;
-    }
-
-    public int getCoordinateY() {
-        return coordinateY;
-    }
-
-    public void setCoordinateX(int coordinateX) {
-        this.coordinateX = coordinateX;
-    }
-
-    public void setCoordinateY(int coordinateY) {
-        this.coordinateY = coordinateY;
-    }
-
+    /**
+     * Проще всего представить две точки как вершины прямоугольного треугольника.
+     * Поэтому дистанция определяется по теореме Пифагора: сумма квадратов длин катетов равна квадрату длины гипотенузы.
+     * <p>
+     * Следовательно необходимо просто найти расстояние между соответствующими двумя точками (это будут катеты),
+     * и потом просто по теореме Пифагора извлечь корень из суммы квадратов этих катетов.
+     * <p>
+     * Здесь нет разницы от какой точки отнимать соответствующие координаты, потому что при возведении в квадрат
+     * все равно получится положительное число.
+     *
+     * @param point точка, до которой нужно высчитать дистанцию
+     * @return дистанция до переданной точки
+     */
     public double distance(Point point) {
-        double power = 2;
-        return Math.sqrt((Math.pow(coordinateX - point.coordinateX, power) + Math.pow(coordinateY - point.coordinateY, power)));
+        double xPow = Math.pow(x - point.x, 2.0);
+        double yPow = Math.pow(y - point.y, 2.0);
+        return Math.sqrt(xPow + yPow);
     }
 
-    public Point distanceMiddle(Point point) {
-        double power = 2;
-        return new Point ((((coordinateX + point.coordinateX)) / 2), (((coordinateY + point.coordinateY) / 2)));
+    @Override
+    public String toString() {
+        return "Point{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 }

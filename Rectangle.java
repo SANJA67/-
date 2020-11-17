@@ -1,17 +1,38 @@
-package ru.dmdev.lesson24.homework;
+package ru.dmdev.lesson24.decisionHW;
 
-public class Rectangle extends Figure implements CalculatingPerimeter, CalculatingDiagonal{
-     public Rectangle(Point point1, Point point2, Point point3, Point point4) {
-        super(point1, point2, point3, point4);
+public class Rectangle extends Figure implements WithDiagonal {
+
+    private final Point leftUpperPoint;
+    private final Point rightLowerPoint;
+
+    public Rectangle(Point leftUpperPoint, Point rightLowerPoint) {
+        this.leftUpperPoint = leftUpperPoint;
+        this.rightLowerPoint = rightLowerPoint;
     }
 
     @Override
-    public double calculateThePerimeter() {
-        return getPoint1().distance(getPoint2()) +  getPoint2().distance(getPoint3()) +  getPoint3().distance(getPoint4()) +  getPoint4().distance(getPoint1());
+    public double getDiagonal() {
+        return leftUpperPoint.distance(rightLowerPoint); //(слева Верхняя точка) расстояние (справа Нижняя точка)
     }
 
     @Override
-    public double calculateTheDiagonal() {
-        return getPoint1().distance(getPoint3());
+    public double getArea() {
+        return (rightLowerPoint.getX() - leftUpperPoint.getX()) * (leftUpperPoint.getY() - rightLowerPoint.getY());
+    }
+
+    @Override
+    public String toString() {
+        return "Rectangle{" +
+                "leftUpperPoint=" + leftUpperPoint +
+                ", rightLowerPoint=" + rightLowerPoint +
+                "}";
+    }
+
+    public Point getLeftUpperPoint() {
+        return leftUpperPoint;
+    }
+
+    public Point getRightLowerPoint() {
+        return rightLowerPoint;
     }
 }
